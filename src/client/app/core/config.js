@@ -13,8 +13,8 @@
     }
 
     var config = {
-        appErrorPrefix: '[carcodaMarketplace Error] ',
-        appTitle: 'carcodaMarketplace'
+        appErrorPrefix: '[Retro Error] ',
+        appTitle: 'Retro'
     };
 
     core.value('config', config);

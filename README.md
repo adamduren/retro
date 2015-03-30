@@ -1,14 +1,14 @@
-# carcodaMarketplace
+# Retro
 
 **Generated from HotTowel Angular**
 
 >*Opinionated AngularJS style guide for teams by [@john_papa](//twitter.com/john_papa)*
 
->More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [AngularJS Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
+>More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [AngularJS Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams.
 
 ## Prerequisites
 
-1. Install [Node.js](http://nodejs.org) 
+1. Install [Node.js](http://nodejs.org)
  - on OSX use [homebrew](http://brew.sh) `brew install node`
  - on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
@@ -52,7 +52,7 @@ The structure also contains a gulpfile.js and a server folder. The server is the
 		/client
 			/app
 			/content
-	
+
 ### Installing Packages
 When you generate the project it should run these commands, but if you notice missing pavkages, run these again:
 
@@ -82,7 +82,7 @@ app --> [
 #### core Module
 Core modules are ones that are shared throughout the entire application and may be customized for the specific application. Example might be common data services.
 
-This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies. 
+This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies.
 
 #### blocks Modules
 Block modules are reusable blocks of code that can be used across projects simply by including them as dependencies.
