@@ -2,34 +2,48 @@
 <html ng-app="retro" ng-cloak>
 <head>
     <title>Retro</title>
+    <link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css">
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-hide>
-    <div retro-board class="container">
-        <div layout="row">
-            <div flex="20" class="bgray">
-                <h3>Board Name</h3>
-                <md-list>
-                    <md-item ng-repeat="attendee in vm.attendees">
-                    <md-item-content>
-                        <div class="md-tile-content">
-                            <div
-                                class="attendee"
-                                ng-class="{ 'is-done': attendee.isDone  }"
-                                ng-click="attendee.isDone = !attendee.isDone">{{ attendee.name }}</div>
-                        </div>
-                    </md-item-content>
-                    </md-item>
-                </md-list>
+<body ng-controller="MainController" ng-hide>
+    <div layout="row">
+        <md-sidenav md-component-id="left" class="md-sidenav-left">
+            <md-button ng-click="toggleLeftMenu()">
+                <i class="fa fa-bars fa-2"></i>
+            </md-button>
+            <h3>Boards</h3>
+        </md-sidenav>
+        <md-content flex="100">
+            <md-button ng-click="toggleLeftMenu()">
+                <i class="fa fa-bars fa-2"></i>
+            </md-button>
+            <div retro-board class="container">
+                <div layout="row">
+                    <div flex="20" class="bgray">
+                        <h3>Board Name</h3>
+                        <md-list>
+                            <md-item ng-repeat="attendee in vm.attendees">
+                            <md-item-content>
+                                <div class="md-tile-content">
+                                    <div
+                                        class="attendee"
+                                        ng-class="{ 'is-done': attendee.isDone  }"
+                                        ng-click="attendee.isDone = !attendee.isDone">{{ attendee.name }}</div>
+                                </div>
+                            </md-item-content>
+                            </md-item>
+                        </md-list>
+                    </div>
+                <div flex="40" class="blightblue">
+                    <h3>To Discuss</h3>
+                </div>
+                    <div flex="20" class="bgray">
+                        <h3>Discussed</h3>
+                    </div>
+                </div>
             </div>
-        <div flex="40" class="blightblue">
-            <h3>To Discuss</h3>
-        </div>
-            <div flex="20" class="bgray">
-                <h3>Discussed</h3>
-            </div>
-        </div>
+        </md-content>
     </div>
 
     <script src="/lib/jquery/dist/jquery.js"></script>
