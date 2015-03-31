@@ -1,0 +1,23 @@
+<div ng-show="vm.data" layout="row">
+    <div flex="20" class="bgray">
+        <h3>Board Name</h3>
+        <md-list>
+            <md-item ng-repeat="attendee in vm.attendees">
+            <md-item-content>
+                <div class="md-tile-content">
+                    <div
+                        class="attendee"
+                        ng-class="{ 'is-done': attendee.isDone  }"
+                        ng-click="attendee.isDone = !attendee.isDone">{{ attendee.name }}</div>
+                </div>
+            </md-item-content>
+            </md-item>
+        </md-list>
+    </div>
+<div flex="40" class="blightblue">
+    <h3>To Discuss</h3>
+</div>
+    <div flex="20" class="bgray">
+        <h3>Discussed</h3>
+    </div>
+</div>
