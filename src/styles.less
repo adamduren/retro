@@ -1,11 +1,19 @@
-.blightblue { 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.blightblue {
     background: #cfe2f3;
-    color: #fff !important;
-    border: 0 !important;
 }
 
 .bgray {
     background: #eee;
-    color: #fff !important;
-    border: 0 !important;
+}
+
+[layout="row"] > div {
+    padding: 10px;
+}
+
+.is-done {
+    font-weight: bold !important;
 }

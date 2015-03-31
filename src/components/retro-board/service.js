@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('retro', ['retro-board']);
+    .module('retro-board.service', []);
 }());
 
