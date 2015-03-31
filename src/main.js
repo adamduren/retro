@@ -1,3 +1,5 @@
+/* global _ */
+
 (function() {
   'use strict';
 
@@ -5,15 +7,20 @@
     .module('retro', ['retro-board'])
     .controller('MainController', MainController);
 
-    function MainController($scope, $mdSidenav, boardService) {
+    function MainController($scope, $mdSidenav, retroBoardService) {
       $scope.toggleLeftMenu = function() {
         $mdSidenav('left').toggle();
       };
 
-      $scope.boards = [];
+      $scope.boards = retroBoardService.boards;
 
       $scope.addBoard = function(name) {
-        $scope.boards.push({name: name});
+        retroBoardService.add({
+          name: name,
+          users: [],
+          cardsToDiscuss: [],
+          cardsDiscussed: []
+        });
         $scope.newBoardName = '';
       };
 
@@ -24,6 +31,6 @@
 
     }
 
-    MainController.$inject = ['$scope', '$mdSidenav'];
+    MainController.$inject = ['$scope', '$mdSidenav', 'retroBoardService'];
 }());
 

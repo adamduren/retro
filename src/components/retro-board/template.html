@@ -1,14 +1,14 @@
 <div ng-show="vm.data" layout="row">
     <div flex="20" class="bgray">
-        <h3>Board Name</h3>
+        <h3>{{ vm.data.name }}</h3>
         <md-list>
-            <md-item ng-repeat="attendee in vm.attendees">
+            <md-item ng-repeat="user in vm.data.users">
             <md-item-content>
                 <div class="md-tile-content">
                     <div
-                        class="attendee"
-                        ng-class="{ 'is-done': attendee.isDone  }"
-                        ng-click="attendee.isDone = !attendee.isDone">{{ attendee.name }}</div>
+                        class="user"
+                        ng-class="{ 'is-done': user.isDone  }"
+                        ng-click="user.isDone = !user.isDone">{{ user.name }}</div>
                 </div>
             </md-item-content>
             </md-item>

@@ -1,3 +1,4 @@
+/* global _ */
 (function() {
   'use strict';
 
@@ -18,20 +19,6 @@
     }
 
     function RetroBoardController() {
-      this.attendees = [
-        {
-          name: 'Adam',
-          isDone: false,
-        },
-        {
-          name: 'Duane',
-          isDone: true,
-        },
-        {
-          name: 'Oz',
-          isDone: false,
-        }
-      ];
     }
 }());
 
