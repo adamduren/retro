@@ -1,9 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="retro">
 <head>
     <title>Retro</title>
+    <link href="/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <div class="container">
+        <md-grid-list
+            md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+            md-row-height-gt-md="1:1" md-row-height="2:2"
+            md-gutter="12px" md-gutter-gt-sm="8px">
+        <md-grid-tile class="bgray" md-rowspan="3" md-colspan="1">
+          <md-grid-tile-header>
+            <h3>Board Name</h3>
+          </md-grid-tile-header>
+        </md-grid-tile>
+        <md-grid-tile class="blightblue" md-rowspan="3" md-colspan="3">
+          <md-grid-tile-header>
+            <h3>To Discuss</h3>
+          </md-grid-tile-header>
+        </md-grid-tile>
+        <md-grid-tile class="bgray" md-rowspan="3" md-colspan="2">
+          <md-grid-tile-header>
+            <h3>Discussed</h3>
+          </md-grid-tile-header>
+        </md-grid-tile>
+      </md-grid-list>
+    </div>
 
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/angular/angular.js"></script>
