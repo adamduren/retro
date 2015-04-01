@@ -1,4 +1,4 @@
-/* global _ */
+/* global _, angular */
 
 (function() {
   'use strict';
@@ -13,20 +13,25 @@
         controllerAs: 'vm',
         bindToController: true,
         templateUrl: '/components/retro-board/template.html',
-        scope: true,
-        link: RetroBoardLink
+        scope: true
       };
     }
 
-    function RetroBoardController($state) {
-      this.boardId = $state.params.id;
-      console.log(this.boardId)
+    function RetroBoardController($state, retroBoardService, cardList) {
+      var vm = this;
+
+      vm.board = retroBoardService.get($state.params.id);
+      vm.cardsToDiscussRef = cardList(vm.board.$id, 'toDiscuss');
+      vm.cardsDiscussedRef = cardList(vm.board.$id, 'discussed');
+
+      vm.addNewToDiscussCard = function() {
+        vm.cardsToDiscussRef.$add({
+          content: '',
+          numVotes: 0
+        });
+      };
     }
 
-    RetroBoardController.$inject = ['$state'];
-
-    function RetroBoardLink(scope, element, attrs, app) {
-
-    }
+    RetroBoardController.$inject = ['$state', 'retroBoardService', 'cardList'];
 }());
 

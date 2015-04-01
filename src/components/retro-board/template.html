@@ -2,11 +2,11 @@
     <div flex="10" class="md-whiteframe-z1">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
-                <span>{{ vm.data.name }}</span>
+                <span>{{ vm.board.name }}</span>
             </div>
         </md-toolbar>
         <md-list>
-            <md-item ng-repeat="user in vm.data.users">
+            <md-item ng-repeat="user in vm.board.users">
                 <md-item-content>
                     <div class="md-tile-content">
                         <div
@@ -18,14 +18,19 @@
             </md-item>
         </md-list>
     </div>
-<div flex="40" class="md-whiteframe-z1">
-    <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">To Discuss</div>
-    </md-toolbar>
-</div>
+    <div flex="40" class="md-whiteframe-z1">
+        <md-toolbar class="md-hue-1" layout="column">
+            <div class="md-toolbar-tools">To Discuss</div>
+            <input type="button" value="+" ng-click="vm.addNewToDiscussCard()">
+        </md-toolbar>
+
+        <retro-card-list ref="vm.cardsToDiscussRef"></retro-card-list>
+    </div>
     <div flex="20" class="md-whiteframe-z1">
         <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">Discussed</div>
-    </md-toolbar>
+            <div class="md-toolbar-tools">Discussed</div>
+        </md-toolbar>
+
+        <retro-card-list ref="vm.cardsDiscussedRef"></retro-card-list>
     </div>
 </div>

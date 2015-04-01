@@ -1,4 +1,4 @@
-/* global Firebase */
+/* global Firebase, angular */
 
 (function() {
   'use strict';
@@ -7,7 +7,7 @@
     .module('retro-board.service', ['firebase'])
     .service('retroBoardService', RetroBoardService);
 
-  function RetroBoardService($firebaseArray) {
+  function RetroBoardService($firebaseArray, $firebaseObject) {
     var
       _this = this,
       baseUrl = 'https://drivecurrent-retrospectives.firebaseio.com/',
@@ -22,8 +22,12 @@
     this.save = function(board) {
       _this.boards.$save(board);
     };
+
+    this.get = function(boardId) {
+      return $firebaseObject(ref.child(boardId));
+    };
   }
 
-  RetroBoardService.$inject = ['$firebaseArray'];
+  RetroBoardService.$inject = ['$firebaseArray', '$firebaseObject'];
 }());
 
