@@ -15,18 +15,22 @@
       };
     }
 
+    function DialogController($scope, $mdDialog) {
+      $scope.answer = function(answer) {
+        $mdDialog.hide();
+      }
+    }
+
     function AppController($mdSidenav, $mdDialog, retroBoardService) {
       this.boards = retroBoardService.boards;
       this.alert = '';
 
       this.viewCard = function(ev) {
-        $mdDialog.show(
-          $mdDialog.alert()
-            .title('Title')
-            .content('Content here.')
-            .ok('Done')
-            .targetEvent(ev)
-        );
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: '/dialog.template.html',
+          targetEvent: ev
+        })
       };
 
       this.addBoard = function(name) {
@@ -54,5 +58,6 @@
     }
 
     AppController.$inject = ['$mdSidenav', '$mdDialog', 'retroBoardService'];
+    DialogController.$inject = ['$scope', '$mdDialog'];
 }());
 
