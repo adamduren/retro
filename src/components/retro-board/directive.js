@@ -1,4 +1,5 @@
 /* global _ */
+
 (function() {
   'use strict';
 
@@ -10,15 +11,30 @@
       return {
         controller: RetroBoardController,
         controllerAs: 'vm',
+        require: '^app',
         bindToController: true,
         templateUrl: '/components/retro-board/template.html',
         scope: {
           data: '='
-        }
+        },
+        link: RetroBoardLink
       };
     }
 
     function RetroBoardController() {
+
+    }
+
+    function RetroBoardLink(scope, element, attrs, app) {
+      scope.$watch('vm.data', function(newValue, oldValue) {
+        // Don't save if it's not yet initialized
+        // or if this is the first initialization
+        if (oldValue === undefined || newValue === undefined) {
+          return;
+        }
+
+        app.updateBoard(newValue);
+      }, true);
     }
 }());
 
