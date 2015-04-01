@@ -23,7 +23,6 @@
 
     function AppController($mdSidenav, $mdDialog, retroBoardService) {
       this.boards = retroBoardService.boards;
-      this.alert = '';
 
       this.viewCard = function(ev) {
         $mdDialog.show({
