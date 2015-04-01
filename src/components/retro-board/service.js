@@ -59,7 +59,7 @@
     return self;
   }
 
-  function RetroBoardListService($firebaseObject, $firebaseArray, RetroBoardService) {
+  function RetroBoardListService($firebaseArray, RetroBoardService) {
     var ref, RetroBoardList, service;
 
     ref = new Firebase(baseUrl + 'boards_list/');
@@ -70,7 +70,7 @@
           key: RetroBoardService.add(name),
           name: name
         });
-      },
+      }
     });
 
     service = new RetroBoardList(ref);
@@ -79,7 +79,7 @@
 
   }
 
-  RetroBoardListService.$inject = ['$firebaseObject', '$firebaseArray', 'retroBoardService'];
+  RetroBoardListService.$inject = ['$firebaseArray', 'retroBoardService'];
   RetroBoardService.$inject = ['$firebaseObject'];
 }());
 

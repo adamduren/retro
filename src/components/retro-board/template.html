@@ -32,14 +32,25 @@
             </md-item>
         </md-list>
     </div>
-<div flex="40" class="md-whiteframe-z1">
-    <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">To Discuss</div>
-    </md-toolbar>
-</div>
+    <div flex="40" class="md-whiteframe-z1">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">To Discuss</div>
+        </md-toolbar>
+
+        <form class="md-tile-content" ng-submit="vm.addToDiscussCard(vm.toDiscussCardTitle)">
+            <md-input-container>
+                <label>Add New Card</label>
+                <input type="text" ng-model="vm.toDiscussCardTitle">
+            </md-input-container>
+        </form>
+
+        <retro-card-list ref="vm.cardsToDiscussRef"></retro-card-list>
+    </div>
     <div flex="20" class="md-whiteframe-z1">
         <md-toolbar class="md-hue-1">
         <div class="md-toolbar-tools">Discussed</div>
     </md-toolbar>
+
+        <retro-card-list ref="vm.cardsDiscussedRef"></retro-card-list>
     </div>
 </div>

@@ -24,11 +24,13 @@
       vm.cardsToDiscussRef = cardList(vm.board.$id, 'toDiscuss');
       vm.cardsDiscussedRef = cardList(vm.board.$id, 'discussed');
 
-      vm.addNewToDiscussCard = function() {
+      vm.toDiscussCardTitle = '';
+      vm.addToDiscussCard = function(cardTitle) {
         vm.cardsToDiscussRef.$add({
-          content: '',
+          content: cardTitle,
           numVotes: 0
         });
+        vm.toDiscussCardTitle = '';
       };
 
       this.newUsername = '';
