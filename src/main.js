@@ -2,8 +2,9 @@
   'use strict';
 
   angular
-    .module('retro', ['retro-board'])
-    .controller('MainController', MainController);
+    .module('retro', ['retro-board', 'retro-card', 'retro-card-list'])
+    .controller('MainController', MainController)
+    .controller('CardListController', CardListController);
 
     function MainController($scope, $mdSidenav, boardService) {
       $scope.toggleLeftMenu = function() {
@@ -25,5 +26,13 @@
     }
 
     MainController.$inject = ['$scope', '$mdSidenav'];
+
+    function CardListController(cards) {
+        var vm = this;
+
+        vm.cards = cards;
+    }
+
+    CardListController.$inject = ['cards'];
 }());
 
