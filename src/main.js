@@ -16,11 +16,6 @@
     }
 
     function AppController($mdSidenav, retroBoardService) {
-
-      this.toggleLeftMenu = function() {
-        $mdSidenav('left').toggle();
-      };
-
       this.boards = retroBoardService.boards;
 
       this.addBoard = function(name) {
@@ -33,8 +28,12 @@
         this.newBoardName = '';
       };
 
+      this.openSidebar = function() {
+        $mdSidenav('left').open();
+      };
+
       this.openBoard = function(board) {
-        this.toggleLeftMenu();
+        $mdSidenav('left').close();
         this.activeBoard = board;
       };
 

@@ -5,7 +5,7 @@
             <md-item>
                 <md-item-content>
                     <input type="text" ng-model="vm.newBoardName">
-                    <md-button ng-click="vm.addBoard(newBoardName)">
+                    <md-button ng-click="vm.addBoard(vm.newBoardName)">
                         <i class="fa fa-plus fa-2"></i>
                     </md-button>
                 </md-item-content>
@@ -18,7 +18,7 @@
         </md-list>
     </md-sidenav>
     <md-content flex="100">
-        <md-button ng-click="vm.toggleLeftMenu()">
+        <md-button ng-click="vm.openSidebar()">
             <i class="fa fa-bars fa-2"></i>
         </md-button>
         <retro-board class="container" data="vm.activeBoard"></retro-board>
