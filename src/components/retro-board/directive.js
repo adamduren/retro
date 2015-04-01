@@ -30,6 +30,17 @@
           numVotes: 0
         });
       };
+
+      this.newUsername = '';
+
+      this.addUser = function (name) {
+        this.board.addUser(name);
+        this.newUsername = '';
+      };
+
+      this.removeUser = function (name) {
+        this.board.removeUser(name);
+      };
     }
 
     RetroBoardController.$inject = ['$state', 'retroBoardService', 'cardList'];

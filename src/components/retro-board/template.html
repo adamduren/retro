@@ -1,36 +1,45 @@
 <div layout="row" layout-fill layout-margin>
-    <div flex="10" class="md-whiteframe-z1">
-        <md-toolbar class="md-hue-1">
+    <div flex="20" class="md-whiteframe-z1">
+        <md-toolbar class="board-toolbar md-hue-1">
             <div class="md-toolbar-tools">
-                <span>{{ vm.board.name }}</span>
+                {{ vm.board.name }}
             </div>
         </md-toolbar>
-        <md-list>
-            <md-item ng-repeat="user in vm.board.users">
+        <md-list class="board-users">
+            <md-item class="board-add-user">
                 <md-item-content>
-                    <div class="md-tile-content">
-                        <div
-                            class="user"
-                            ng-class="{ 'is-done': user.isDone  }"
-                            ng-click="user.isDone = !user.isDone">{{ user.name }}</div>
+                    <form class="md-tile-content" ng-submit="vm.addUser(vm.newUsername)">
+                        <md-input-container>
+                            <label>Add New User</label>
+                            <input type="text" ng-model="vm.newUsername">
+                        </md-input-container>
+                    </form>
+                </md-item-content>
+            </md-item>
+            <md-item class="board-user" ng-repeat="user in vm.board.users">
+                <md-item-content>
+                    <div
+                        class="md-tile-content user"
+                        ng-class="{ 'is-done': user.isDone  }"
+                        ng-click="user.isDone = !user.isDone">{{ user.name }}
+                    </div>
+                    <div class="board-remove-user md-tile-right">
+                        <md-button class="md-warn" ng-click="vm.removeUser(user)">
+                            <i class="fa fa-remove fa-2"></i>
+                        </md-button>&nbsp;
                     </div>
                 </md-item-content>
             </md-item>
         </md-list>
     </div>
-    <div flex="40" class="md-whiteframe-z1">
-        <md-toolbar class="md-hue-1" layout="column">
-            <div class="md-toolbar-tools">To Discuss</div>
-            <input type="button" value="+" ng-click="vm.addNewToDiscussCard()">
-        </md-toolbar>
-
-        <retro-card-list ref="vm.cardsToDiscussRef"></retro-card-list>
-    </div>
+<div flex="40" class="md-whiteframe-z1">
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">To Discuss</div>
+    </md-toolbar>
+</div>
     <div flex="20" class="md-whiteframe-z1">
         <md-toolbar class="md-hue-1">
-            <div class="md-toolbar-tools">Discussed</div>
-        </md-toolbar>
-
-        <retro-card-list ref="vm.cardsDiscussedRef"></retro-card-list>
+        <div class="md-toolbar-tools">Discussed</div>
+    </md-toolbar>
     </div>
 </div>

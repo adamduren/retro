@@ -1,4 +1,4 @@
-/* global _, angular */
+/* global _ */
 
 (function() {
   'use strict';
@@ -25,22 +25,17 @@
         });
     }
 
-    Config.$inject = ['$stateProvider', '$urlRouterProvider'];
+  Config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 
-    function MainController($state, $mdSidenav, retroBoardService) {
-      this.isSideNavOpen = $state.current.name === 'boards';
-      this.newBoardName = '';
-      this.activeBoard = '';
-      this.boards = retroBoardService.boards;
+  function MainController($state, $mdSidenav, retroBoardService, retroBoardListService) {
+    this.isSideNavOpen = $state.current.name === 'boards';
+    this.newBoardName = '';
+    this.activeBoard = '';
+    this.boards = retroBoardListService;
 
       this.addBoard = function(name) {
-        retroBoardService.add({
-          name: name,
-          users: [],
-          cardsToDiscuss: [],
-          cardsDiscussed: []
-        });
+        retroBoardListService.add(name);
         this.newBoardName = '';
       };
 
@@ -50,7 +45,7 @@
 
       this.openBoard = function(board) {
         $mdSidenav('left').close();
-        $state.go('boards.view', {id: board.$id});
+        $state.go('boards.view', {id: board.key});
       };
 
       this.updateBoard = function(board) {
@@ -58,45 +53,6 @@
       };
     }
 
-    MainController.$inject = ['$state', '$mdSidenav', 'retroBoardService'];
-
-    //.directive('app', App);
-    //
-    //function App() {
-    //  return {
-    //    controller: AppController,
-    //    controllerAs: 'vm',
-    //    templateUrl: '/main.html'
-    //  };
-    //}
-    //
-    //function AppController($mdSidenav, retroBoardService) {
-    //  this.boards = retroBoardService.boards;
-    //
-    //  this.addBoard = function(name) {
-    //    retroBoardService.add({
-    //      name: name,
-    //      users: [],
-    //      cardsToDiscuss: [],
-    //      cardsDiscussed: []
-    //    });
-    //    this.newBoardName = '';
-    //  };
-    //
-    //  this.openSidebar = function() {
-    //    $mdSidenav('left').open();
-    //  };
-    //
-    //  this.openBoard = function(board) {
-    //    $mdSidenav('left').close();
-    //    this.activeBoard = board;
-    //  };
-    //
-    //  this.updateBoard = function(board) {
-    //    this.boards.$save(board);
-    //  };
-    //}
-    //
-    //AppController.$inject = ['$mdSidenav', 'retroBoardService'];
+    MainController.$inject = ['$state', '$mdSidenav', 'retroBoardService', 'retroBoardListService'];
 }());
 
