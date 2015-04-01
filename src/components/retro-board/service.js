@@ -43,14 +43,13 @@
     self = {
       add: function(key) {
         var board = getBoardRef(key);
-        if (!this[name]) {
-          this[name] = {
-            name: name
-          };
-          this.$save();
+
+        if (!board.name) {
+          board.name = key;
+          board.$save();
         }
 
-        return this.$ref().child(name).key();
+        return board.$id;
       },
       get: function(key) {
         return getBoardRef(key);

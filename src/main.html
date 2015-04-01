@@ -21,14 +21,12 @@
         <md-list>
             <md-item>
                 <md-item-content>
-                    <div class="md-tile-content">
-                        <form>
+                    <form class="md-tile-content" ng-submit="vm.addBoard(vm.newBoardName)">
+                        <md-input-container>
+                            <label>Add New Board</label>
                             <input type="text" ng-model="vm.newBoardName">
-                            <md-button class="md-primary" ng-click="vm.addBoard(vm.newBoardName)">
-                                Add
-                            </md-button>
-                        </form>
-                    </div>
+                        </md-input-container>
+                    </form>
                 </md-item-content>
             </md-item>
             <md-item ng-repeat="board in vm.boards">
