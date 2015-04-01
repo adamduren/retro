@@ -19,6 +19,9 @@
       _this.boards.$add(board);
     };
 
+    this.save = function(board) {
+      _this.boards.$save(board);
+    };
   }
 
   RetroBoardService.$inject = ['$firebaseArray'];

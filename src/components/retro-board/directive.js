@@ -11,30 +11,22 @@
       return {
         controller: RetroBoardController,
         controllerAs: 'vm',
-        require: '^app',
         bindToController: true,
         templateUrl: '/components/retro-board/template.html',
-        scope: {
-          data: '='
-        },
+        scope: true,
         link: RetroBoardLink
       };
     }
 
-    function RetroBoardController() {
-
+    function RetroBoardController($state) {
+      this.boardId = $state.params.id;
+      console.log(this.boardId)
     }
 
-    function RetroBoardLink(scope, element, attrs, app) {
-      scope.$watch('vm.data', function(newValue, oldValue) {
-        // Don't save if it's not yet initialized
-        // or if this is the first initialization
-        if (oldValue === undefined || newValue === undefined) {
-          return;
-        }
+    RetroBoardController.$inject = ['$state'];
 
-        app.updateBoard(newValue);
-      }, true);
+    function RetroBoardLink(scope, element, attrs, app) {
+
     }
 }());
 
