@@ -1,0 +1,46 @@
+<div layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button ng-click="vm.openSidebar()">
+                <i class="fa fa-bars fa-2"></i>
+            </md-button>&nbsp;
+            <span>Retro</span>
+        </div>
+    </md-toolbar>
+
+    <md-sidenav
+        md-is-open="true"
+        md-component-id="left"
+        class="md-sidenav-left">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>Boards</span>
+            </div>
+        </md-toolbar>
+        <md-list>
+            <md-item>
+                <md-item-content>
+                    <div class="md-tile-content">
+                        <form>
+                            <input type="text" ng-model="vm.newBoardName" ng-submit="">
+                            <md-button class="md-primary" ng-click="vm.addBoard(vm.newBoardName)">
+                                Add
+                            </md-button>
+                        </form>
+                    </div>
+                </md-item-content>
+            </md-item>
+            <md-item ng-repeat="board in vm.boards">
+                <md-item-content ng-click="vm.openBoard(board)">
+                    <div class="md-tile-content">{{ board.name }}</div>
+                </md-item-content>
+            </md-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-content>
+        <retro-board class="container" data="vm.activeBoard"></retro-board>
+    </md-content>
+</div>
+

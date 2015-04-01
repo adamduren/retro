@@ -6,36 +6,8 @@
     <link href="/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css">
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-controller="MainController" ng-hide>
-    <div layout="row">
-        <md-sidenav md-is-open="true" md-component-id="left" class="md-sidenav-left">
-            <md-button ng-click="toggleLeftMenu()">
-                <i class="fa fa-bars fa-2"></i>
-            </md-button>
-            <h3>Boards</h3>
-            <md-list>
-                <md-item>
-                    <md-item-content>
-                        <input type="text" ng-model="newBoardName">
-                        <md-button ng-click="addBoard(newBoardName)">
-                            <i class="fa fa-plus fa-2"></i>
-                        </md-button>
-                    </md-item-content>
-                </md-item>
-                <md-item ng-repeat="board in boards">
-                    <md-item-content ng-click="openBoard(board)">
-                        <div class="md-tile-content">{{ board.name }}</div>
-                    </md-item-content>
-                </md-item>
-            </md-list>
-        </md-sidenav>
-        <md-content flex="100">
-            <md-button ng-click="toggleLeftMenu()">
-                <i class="fa fa-bars fa-2"></i>
-            </md-button>
-            <retro-board class="container" data="activeBoard"></retro-board>
-        </md-content>
-    </div>
+<body>
+    <app></app>
 
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/angular/angular.js"></script>

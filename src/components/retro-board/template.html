@@ -1,24 +1,31 @@
-<div ng-show="vm.data" layout="row">
-    <div flex="20" class="bgray">
-        <h3>Board Name</h3>
+<div ng-show="vm.data" layout="row" layout-fill layout-margin>
+    <div flex="10" class="md-whiteframe-z1">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <span>{{ vm.data.name }}</span>
+            </div>
+        </md-toolbar>
         <md-list>
-            <md-item ng-repeat="attendee in vm.attendees">
-            <md-item-content>
-                <div class="md-tile-content">
-                    <div
-                        class="attendee"
-                        ng-class="{ 'is-done': attendee.isDone  }"
-                        ng-click="attendee.isDone = !attendee.isDone">{{ attendee.name }}</div>
-                </div>
-            </md-item-content>
+            <md-item ng-repeat="user in vm.data.users">
+                <md-item-content>
+                    <div class="md-tile-content">
+                        <div
+                            class="user"
+                            ng-class="{ 'is-done': user.isDone  }"
+                            ng-click="user.isDone = !user.isDone">{{ user.name }}</div>
+                    </div>
+                </md-item-content>
             </md-item>
         </md-list>
     </div>
-    <div flex="40" class="blightblue">
-        <h3>To Discuss</h3>
-        <retro-card-list></retro-card-list>
-    </div>
-    <div flex="20" class="bgray">
-        <h3>Discussed</h3>
+<div flex="40" class="md-whiteframe-z1">
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">To Discuss</div>
+    </md-toolbar>
+</div>
+    <div flex="20" class="md-whiteframe-z1">
+        <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">Discussed</div>
+    </md-toolbar>
     </div>
 </div>
