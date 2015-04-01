@@ -32,7 +32,9 @@ gulp.task('templates', function () {
 gulp.task('less', function () {
   gulp.src(inputPaths.less)
     .pipe(plumber())
-    .pipe(less())
+    .pipe(less({
+      paths: ['bower_components/lesshat/build']
+    }))
     .pipe(gulp.dest(outputPaths.css))
     .pipe(livereload());
 });

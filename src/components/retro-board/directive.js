@@ -22,6 +22,16 @@
     }
 
     function RetroBoardController() {
+      this.newUsername = '';
+
+      this.addUser = function(name) {
+        this.data.addUser(name);
+        this.newUsername = '';
+      };
+
+      this.removeUser = function(name) {
+        this.data.removeUser(name);
+      };
 
     }
 

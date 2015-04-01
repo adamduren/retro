@@ -1,7 +1,22 @@
+@import 'lesshat'
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
 .is-done {
-    font-weight: bold !important;
+  font-weight: bold !important;
+}
+
+.board-user {
+  &:hover {
+    .board-remove-user  {
+    opacity: 1;
+    }
+  }
+
+  .board-remove-user {
+    opacity: 0;
+    .transition(opacity .25s ease-in-out);
+  }
 }

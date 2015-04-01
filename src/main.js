@@ -15,16 +15,11 @@
       };
     }
 
-    function AppController($mdSidenav, retroBoardService) {
-      this.boards = retroBoardService.boards;
+    function AppController($mdSidenav, retroBoardListService, retroBoardService) {
+      this.boards = retroBoardListService;
 
       this.addBoard = function(name) {
-        retroBoardService.add({
-          name: name,
-          users: [],
-          cardsToDiscuss: [],
-          cardsDiscussed: []
-        });
+        retroBoardListService.add(name);
         this.newBoardName = '';
       };
 
@@ -34,7 +29,7 @@
 
       this.openBoard = function(board) {
         $mdSidenav('left').close();
-        this.activeBoard = board;
+        this.activeBoard = retroBoardService.get(board.key);
       };
 
       this.updateBoard = function(board) {
@@ -42,6 +37,6 @@
       };
     }
 
-    AppController.$inject = ['$mdSidenav', 'retroBoardService'];
+    AppController.$inject = ['$mdSidenav', 'retroBoardListService', 'retroBoardService'];
 }());
 
