@@ -1,18 +1,45 @@
-/* global angular */
+/* global angular, Firebase */
 
 (function() {
   'use strict';
 
-  angular
-    .module('retro-card-list.service', ['retro.firebase'])
-    .service('cardList', CardListService);
+  var baseUrl = 'https://drivecurrent-retrospectives.firebaseio.com/';
 
-  function CardListService(backEnd, $firebaseArray) {
-    var cards = backEnd('cards');
-    return function(boardId, node) {
-      return $firebaseArray(cards.child(boardId).child(node));
+  angular
+    .module('retro-card-list.service', ['firebase'])
+    .factory('retroCardService', RetroCardService)
+    .factory('retroCardListService', RetroCardListService);
+
+  function RetroCardService($firebaseArray) {
+    function getCardRef() {
+      var ref = new Firebase(baseUrl + 'cards_data/');
+      return new $firebaseArray(ref);
+    }
+
+    return {
+      add: function(cardTitle) {
+        var cards = getCardRef();
+        return cards.$add({
+          title: cardTitle,
+          votes: 0
+        });
+      },
+      get: function(key) {
+        var cards = getCardRef();
+        return cards.$getRecord(key);
+      }
     };
   }
 
-  CardListService.$inject = ['backEnd', '$firebaseArray'];
+  RetroCardService.$inject = ['$firebaseArray'];
+
+  function RetroCardListService() {
+    return {
+      get: function() {
+
+      }
+    };
+  }
+
+  RetroCardListService.$inject = [];
 }());

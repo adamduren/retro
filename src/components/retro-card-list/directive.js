@@ -15,7 +15,7 @@
       controller: RetroCardListController,
       controllerAs: 'vm',
       scope: {
-        cardList: '=ref'
+        cardList: '='
       }
     };
   }

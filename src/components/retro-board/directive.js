@@ -17,34 +17,30 @@
       };
     }
 
-    function RetroBoardController($state, retroBoardService, cardList) {
+    function RetroBoardController($state, retroBoardService, retroCardListService) {
       var vm = this;
 
       vm.board = retroBoardService.get($state.params.id);
-      vm.cardsToDiscussRef = cardList(vm.board.$id, 'toDiscuss');
-      vm.cardsDiscussedRef = cardList(vm.board.$id, 'discussed');
+      vm.cards = retroCardListService.get(vm.board.$id);
 
       vm.toDiscussCardTitle = '';
       vm.addToDiscussCard = function(cardTitle) {
-        vm.cardsToDiscussRef.$add({
-          content: cardTitle,
-          numVotes: 0
-        });
+        vm.board.addCard(cardTitle);
         vm.toDiscussCardTitle = '';
       };
 
-      this.newUsername = '';
+      vm.newUsername = '';
 
-      this.addUser = function (name) {
-        this.board.addUser(name);
-        this.newUsername = '';
+      vm.addUser = function (name) {
+        vm.board.addUser(name);
+        vm.newUsername = '';
       };
 
-      this.removeUser = function (name) {
-        this.board.removeUser(name);
+      vm.removeUser = function (name) {
+        vm.board.removeUser(name);
       };
     }
 
-    RetroBoardController.$inject = ['$state', 'retroBoardService', 'cardList'];
+    RetroBoardController.$inject = ['$state', 'retroBoardService', 'retroCardListService'];
 }());
 
