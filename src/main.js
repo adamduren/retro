@@ -27,7 +27,7 @@
             .ok('Done')
             .targetEvent(ev)
         );
-      }
+      };
 
       this.addBoard = function(name) {
         retroBoardService.add({
