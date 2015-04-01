@@ -1,29 +1,47 @@
+/* global _ */
+
 (function() {
   'use strict';
 
   angular
     .module('retro', ['retro-board'])
-    .controller('MainController', MainController);
+    .directive('app', App);
 
-    function MainController($scope, $mdSidenav, boardService) {
-      $scope.toggleLeftMenu = function() {
-        $mdSidenav('left').toggle();
+    function App() {
+      return {
+        controller: AppController,
+        controllerAs: 'vm',
+        templateUrl: '/main.html'
       };
-
-      $scope.boards = [];
-
-      $scope.addBoard = function(name) {
-        $scope.boards.push({name: name});
-        $scope.newBoardName = '';
-      };
-
-      $scope.openBoard = function(board) {
-        $scope.toggleLeftMenu();
-        $scope.activeBoard = board;
-      };
-
     }
 
-    MainController.$inject = ['$scope', '$mdSidenav'];
+    function AppController($mdSidenav, retroBoardService) {
+      this.boards = retroBoardService.boards;
+
+      this.addBoard = function(name) {
+        retroBoardService.add({
+          name: name,
+          users: [],
+          cardsToDiscuss: [],
+          cardsDiscussed: []
+        });
+        this.newBoardName = '';
+      };
+
+      this.openSidebar = function() {
+        $mdSidenav('left').open();
+      };
+
+      this.openBoard = function(board) {
+        $mdSidenav('left').close();
+        this.activeBoard = board;
+      };
+
+      this.updateBoard = function(board) {
+        this.boards.$save(board);
+      };
+    }
+
+    AppController.$inject = ['$mdSidenav', 'retroBoardService'];
 }());
 
