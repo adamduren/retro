@@ -15,8 +15,19 @@
       };
     }
 
-    function AppController($mdSidenav, retroBoardService) {
+    function AppController($mdSidenav, $mdDialog, retroBoardService) {
       this.boards = retroBoardService.boards;
+      this.alert = '';
+
+      this.viewCard = function(ev) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('Title')
+            .content('Content here.')
+            .ok('Done')
+            .targetEvent(ev)
+        );
+      }
 
       this.addBoard = function(name) {
         retroBoardService.add({
@@ -42,6 +53,6 @@
       };
     }
 
-    AppController.$inject = ['$mdSidenav', 'retroBoardService'];
+    AppController.$inject = ['$mdSidenav', '$mdDialog', 'retroBoardService'];
 }());
 
