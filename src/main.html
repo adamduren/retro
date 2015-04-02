@@ -9,7 +9,7 @@
     </md-toolbar>
 
     <md-sidenav
-        md-is-open="true"
+        md-is-open="vm.isSideNavOpen"
         md-component-id="left"
         class="md-sidenav-left">
 
@@ -38,7 +38,7 @@
     </md-sidenav>
 
     <md-content>
-        <retro-board class="container" data="vm.activeBoard"></retro-board>
+        <div ui-view></div>
     </md-content>
 </div>
 

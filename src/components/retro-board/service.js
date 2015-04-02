@@ -1,4 +1,4 @@
-/* global Firebase */
+/* global Firebase, angular */
 
 (function() {
   'use strict';
@@ -6,19 +6,19 @@
   var baseUrl = 'https://drivecurrent-retrospectives.firebaseio.com/';
 
   angular
-    .module('retro-board.service', ['firebase'])
+    .module('retro-board.service', ['firebase', 'retro-card-list'])
     .factory('retroBoardService', RetroBoardService)
     .factory('retroBoardListService', RetroBoardListService);
 
 
-  function RetroBoardService($firebaseObject) {
+  function RetroBoardService($firebaseObject, $firebaseArray, retroCardService) {
     var self, BoardFactory;
 
     BoardFactory = $firebaseObject.$extend({
       addUser: function(name) {
         this.users = this.users || {};
 
-        if (!this.users.name) {
+        if (!this.users[name]) {
           this.users[name] = {
             name: name,
             isDone: false,
@@ -29,6 +29,19 @@
       removeUser: function(user) {
         this.users = this.users || {};
         delete this.users[user.name];
+        this.$save();
+      },
+      addCard: function(cardTitle) {
+        var self = this;
+        self.cards = this.cards || [];
+        retroCardService.add(cardTitle).then(function(ref) {
+          self.cards.push(ref.key());
+          self.$save();
+        });
+      },
+      removeCard: function(card) {
+        this.cards = this.cards || {};
+        delete this.cards[card.$id];
         this.$save();
       }
     });
@@ -59,7 +72,9 @@
     return self;
   }
 
-  function RetroBoardListService($firebaseObject, $firebaseArray, RetroBoardService) {
+  RetroBoardService.$inject = ['$firebaseObject', '$firebaseArray', 'retroCardService'];
+
+  function RetroBoardListService($firebaseArray, RetroBoardService) {
     var ref, RetroBoardList, service;
 
     ref = new Firebase(baseUrl + 'boards_list/');
@@ -70,7 +85,7 @@
           key: RetroBoardService.add(name),
           name: name
         });
-      },
+      }
     });
 
     service = new RetroBoardList(ref);
@@ -79,7 +94,6 @@
 
   }
 
-  RetroBoardListService.$inject = ['$firebaseObject', '$firebaseArray', 'retroBoardService'];
-  RetroBoardService.$inject = ['$firebaseObject'];
+  RetroBoardListService.$inject = ['$firebaseArray', 'retroBoardService'];
 }());
 

@@ -1,42 +1,53 @@
-/* global _ */
+/* global _, angular */
 
 (function() {
   'use strict';
 
   angular
-    .module('retro', ['retro-board'])
-    .directive('app', App);
+    .module('retro', ['retro-board', 'ui.router'])
+    .config(Config)
+    .controller('MainController', MainController);
 
-    function App() {
-      return {
-        controller: AppController,
-        controllerAs: 'vm',
-        templateUrl: '/main.html'
-      };
-    }
+  function Config($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('boards');
 
-    function AppController($mdSidenav, retroBoardListService, retroBoardService) {
-      this.boards = retroBoardListService;
+    $stateProvider
+      .state('boards', {
+        url: '/boards',
+        templateUrl: '/main.html',
+        controller: 'MainController',
+        controllerAs: 'vm'
+      })
+      .state('boards.view', {
+        url: '/:id',
+        template: '<retro-board></retro-board>'
+      });
+  }
 
-      this.addBoard = function(name) {
-        retroBoardListService.add(name);
-        this.newBoardName = '';
-      };
+  Config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-      this.openSidebar = function() {
-        $mdSidenav('left').open();
-      };
 
-      this.openBoard = function(board) {
-        $mdSidenav('left').close();
-        this.activeBoard = retroBoardService.get(board.key);
-      };
+  function MainController($state, $mdSidenav, retroBoardListService) {
+    this.isSideNavOpen = $state.current.name === 'boards';
+    this.activeBoard = '';
+    this.boards = retroBoardListService;
 
-      this.updateBoard = function(board) {
-        this.boards.$save(board);
-      };
-    }
+    this.newBoardName = '';
+    this.addBoard = function(name) {
+      retroBoardListService.add(name);
+      this.newBoardName = '';
+    };
 
-    AppController.$inject = ['$mdSidenav', 'retroBoardListService', 'retroBoardService'];
+    this.openSidebar = function() {
+      $mdSidenav('left').open();
+    };
+
+    this.openBoard = function(board) {
+      $mdSidenav('left').close();
+      $state.go('boards.view', {id: board.key});
+    };
+  }
+
+  MainController.$inject = ['$state', '$mdSidenav', 'retroBoardListService'];
 }());
 

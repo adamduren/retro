@@ -1,8 +1,8 @@
-<div ng-show="vm.data" layout="row" layout-fill layout-margin>
+<div layout="row" layout-fill layout-margin>
     <div flex="20" class="md-whiteframe-z1">
         <md-toolbar class="board-toolbar md-hue-1">
             <div class="md-toolbar-tools">
-                {{ vm.data.name }}
+                {{ vm.board.name }}
             </div>
         </md-toolbar>
         <md-list class="board-users">
@@ -16,7 +16,7 @@
                     </form>
                 </md-item-content>
             </md-item>
-            <md-item class="board-user" ng-repeat="user in vm.data.users">
+            <md-item class="board-user" ng-repeat="user in vm.board.users">
                 <md-item-content>
                     <div
                         class="md-tile-content user"
@@ -32,14 +32,25 @@
             </md-item>
         </md-list>
     </div>
-<div flex="40" class="md-whiteframe-z1">
-    <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">To Discuss</div>
-    </md-toolbar>
-</div>
+    <div flex="40" class="md-whiteframe-z1">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">To Discuss</div>
+        </md-toolbar>
+
+        <form class="md-tile-content" ng-submit="vm.addToDiscussCard(vm.toDiscussCardTitle)">
+            <md-input-container>
+                <label>Add New Card</label>
+                <input type="text" ng-model="vm.toDiscussCardTitle">
+            </md-input-container>
+        </form>
+
+        <retro-card-list card-list="vm.cards" filter-expression="{status: 'toDiscuss'}"></retro-card-list>
+    </div>
     <div flex="20" class="md-whiteframe-z1">
         <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">Discussed</div>
-    </md-toolbar>
+            <div class="md-toolbar-tools">Discussed</div>
+        </md-toolbar>
+
+        <retro-card-list card-list="vm.cards" filter-expression="{status: 'discussed'}"></retro-card-list>
     </div>
 </div>

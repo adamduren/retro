@@ -1,4 +1,4 @@
-/* global _ */
+/* global _, angular */
 
 (function() {
   'use strict';
@@ -11,40 +11,36 @@
       return {
         controller: RetroBoardController,
         controllerAs: 'vm',
-        require: '^app',
         bindToController: true,
         templateUrl: '/components/retro-board/template.html',
-        scope: {
-          data: '='
-        },
-        link: RetroBoardLink
+        scope: true
       };
     }
 
-    function RetroBoardController() {
-      this.newUsername = '';
+    function RetroBoardController($state, retroBoardService, retroCardListService, $filter) {
+      var vm = this;
 
-      this.addUser = function(name) {
-        this.data.addUser(name);
-        this.newUsername = '';
+      vm.board = retroBoardService.get($state.params.id);
+      vm.cards = retroCardListService.get(vm.board);
+
+      vm.toDiscussCardTitle = '';
+      vm.addToDiscussCard = function(cardTitle) {
+        vm.board.addCard(cardTitle);
+        vm.toDiscussCardTitle = '';
       };
 
-      this.removeUser = function(name) {
-        this.data.removeUser(name);
+      vm.newUsername = '';
+
+      vm.addUser = function (name) {
+        vm.board.addUser(name);
+        vm.newUsername = '';
       };
 
+      vm.removeUser = function (name) {
+        vm.board.removeUser(name);
+      };
     }
 
-    function RetroBoardLink(scope, element, attrs, app) {
-      scope.$watch('vm.data', function(newValue, oldValue) {
-        // Don't save if it's not yet initialized
-        // or if this is the first initialization
-        if (oldValue === undefined || newValue === undefined) {
-          return;
-        }
-
-        app.updateBoard(newValue);
-      }, true);
-    }
+    RetroBoardController.$inject = ['$state', 'retroBoardService', 'retroCardListService', '$filter'];
 }());
 
