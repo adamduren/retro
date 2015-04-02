@@ -48,7 +48,7 @@
           locals: {
             card: card
           },
-          templateUrl: '/dialog.template.html',
+          templateUrl: '/components/retro-card/dialog.html',
         })
         .then(function(data) {
           console.log(data);
