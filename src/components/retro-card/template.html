@@ -12,9 +12,10 @@
 
     <md-card-footer>
         <md-button
+            ng-if="vm.card.status !== 'discussed'"
             ng-click="vm.toggleVote()"
             stop-propagation="click"
-            ng-if="vm.card.status !== 'discussed'"
+            ng-class="{ 'md-accent md-hue-1': vm.voted }"
             class="md-primary">
             <span>{{ vm.card.votes }} <i class="fa fa-thumbs-up"></i></span>
         </md-button>
