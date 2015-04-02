@@ -1,0 +1,14 @@
+<md-card class="retro-item" flex>
+    <div ng-if="!vm.editing">
+        <div ng-click="vm.editing = true">{{ vm.card.title || '&nbsp;' }}</div>
+        <input type="button" ng-click="vm.toggleVote()" value="Vote"> X <span>{{ vm.card.votes }}</span>
+    </div>
+
+    <div ng-if="vm.editing">
+        <textarea ng-model="vm.card.title"></textarea>
+        <input type="submit" value="Save" ng-click="vm.editing = false">
+    </div>
+    <md-button class="md-primary" ng-click="vm.viewCard(vm.card)">
+        View Card
+    </md-button>
+</md-card>

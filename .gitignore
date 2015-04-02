@@ -3,3 +3,4 @@ node_modules/
 public/
 .idea
 .tmp
+npm-debug.log

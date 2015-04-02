@@ -1,76 +1,52 @@
-/* global _ */
+/* global _, angular */
 
 (function() {
   'use strict';
 
   angular
-    .module('retro', ['retro-board'])
-    .directive('app', App);
+    .module('retro', ['retro-board', 'ui.router'])
+    .config(Config)
+    .controller('MainController', MainController);
 
-    function App() {
-      return {
-        controller: AppController,
-        controllerAs: 'vm',
-        templateUrl: '/main.html'
-      };
-    }
+  function Config($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('boards');
 
-    function DialogController($mdDialog) {
-      this.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
-    }
+    $stateProvider
+      .state('boards', {
+        url: '/boards',
+        templateUrl: '/main.html',
+        controller: 'MainController',
+        controllerAs: 'vm'
+      })
+      .state('boards.view', {
+        url: '/:id',
+        template: '<retro-board></retro-board>'
+      });
+  }
 
-    function AppController($mdSidenav, $mdDialog, retroBoardService) {
-      this.boards = retroBoardService.boards;
+  Config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-      this.activeCard = {
-        name: 'My Card',
-        description: 'Something about the card',
-        actionItems: 'We should do this',
-        status: 'Discussed',
-      };
+  function MainController($state, $mdSidenav, retroBoardListService) {
+    this.isSideNavOpen = $state.current.name === 'boards';
+    this.activeBoard = '';
+    this.boards = retroBoardListService;
 
-      this.viewCard = function() {
-        $mdDialog.show({
-          controller: DialogController,
-          controllerAs: 'vm',
-          bindToController: true,
-          locals: {
-            card: this.activeCard
-          },
-          templateUrl: '/dialog.template.html',
-        })
-        .then(function(data) {
-          console.log(data);
-        });
-      };
+    this.newBoardName = '';
+    this.addBoard = function(name) {
+      retroBoardListService.add(name);
+      this.newBoardName = '';
+    };
 
-      this.addBoard = function(name) {
-        retroBoardService.add({
-          name: name,
-          users: [],
-          cardsToDiscuss: [],
-          cardsDiscussed: []
-        });
-        this.newBoardName = '';
-      };
+    this.openSidebar = function() {
+      $mdSidenav('left').open();
+    };
 
-      this.openSidebar = function() {
-        $mdSidenav('left').open();
-      };
+    this.openBoard = function(board) {
+      $mdSidenav('left').close();
+      $state.go('boards.view', {id: board.key});
+    };
+  }
 
-      this.openBoard = function(board) {
-        $mdSidenav('left').close();
-        this.activeBoard = board;
-      };
-
-      this.updateBoard = function(board) {
-        this.boards.$save(board);
-      };
-    }
-
-    AppController.$inject = ['$mdSidenav', '$mdDialog', 'retroBoardService'];
-    DialogController.$inject = ['$mdDialog'];
+  MainController.$inject = ['$state', '$mdSidenav', 'retroBoardListService'];
 }());
 
