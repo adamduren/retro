@@ -30,6 +30,9 @@
       get: function(key) {
         var cards = getCardRef();
         return cards.$getRecord(key);
+      },
+      remove: function(card) {
+        card.$remove();
       }
     };
   }

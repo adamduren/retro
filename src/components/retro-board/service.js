@@ -40,9 +40,10 @@
         });
       },
       removeCard: function(card) {
-        this.cards = this.cards || {};
-        delete this.cards[card.$id];
+        this.cards = _.without(this.cards || [], card.$id);
         this.$save();
+
+        retroCardService.remove(card);
       }
     });
 

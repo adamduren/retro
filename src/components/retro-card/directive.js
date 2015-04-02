@@ -3,7 +3,7 @@
 (function () {
     'use strict';
 
-    angular.module('retro-card.directive', ['retro.firebase'])
+    angular.module('retro-card.directive', ['retro-board'])
         .directive('retroCard', RetroCard);
 
     function RetroCard () {
@@ -14,7 +14,7 @@
             bindToController: true,
             controller: RetroCardController,
             controllerAs: 'vm',
-            require: '^retroCardList',
+            require: ['retroCard', '^retroBoard'],
             link: RetroCardLink,
             scope: {
               card: '='
@@ -25,7 +25,7 @@
     RetroCard.$inject = [];
 
     function RetroCardController($mdDialog) {
-        var _this = this;
+      var _this = this;
 
       this.voted = false;
       this.editing = false;
@@ -68,12 +68,19 @@
 
     RetroCardController.$inject = ['$mdDialog'];
 
-    function RetroCardLink($scope, $elem, $attrs, retroCardList) {
-        $scope.$watch('vm.card', function (newValue, oldValue) {
-          if (newValue !== oldValue) {
-            newValue.$save();
-          }
-        }, true);
+    function RetroCardLink($scope, $elem, $attrs, controllers) {
+      var retroCard = controllers[0],
+          retroBoard = controllers[1];
+
+      retroCard.removeCard = function() {
+        retroBoard.removeCard(retroCard.card);
+      };
+
+      $scope.$watch('vm.card', function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+          newValue.$save();
+        }
+      }, true);
     }
 
     function RetroCardDialogController($mdDialog) {

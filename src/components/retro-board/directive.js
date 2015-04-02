@@ -30,6 +30,10 @@
         vm.toDiscussCardTitle = '';
       };
 
+      vm.removeCard = function(card) {
+        vm.board.removeCard(card);
+      };
+
       vm.addUser = function (name) {
         vm.board.addUser(name);
         vm.newUsername = '';
