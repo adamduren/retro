@@ -8,18 +8,29 @@
   font-weight: bold !important;
 }
 
+.edit-in-place {
+  cursor: text;
+
+  &.static-text {
+    font-weight: normal;
+  }
+
+  &.default-text {
+    font-style: italic;
+  }
+}
+
 .retro-item {
   cursor: pointer;
 
   .edit-in-place.static-text {
     font-weight: bold;
-    cursor: text;
   }
 }
 
 .retro-dialog {
-  .action-items {
-    .edit-in-place.static-text {
+  .edit-in-place {
+    &.static-text {
       white-space: pre-wrap;
     }
   }
