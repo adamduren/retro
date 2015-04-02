@@ -3,23 +3,21 @@
     <div class="dialog-content">
       <h2>{{ vm.card.title }}</h2>
       <p ng-hide="vm.editingDescription" ng-click="vm.editingDescription = true">
-        <span ng-if="vm.card.description === ''">Enter Description</span>
-        {{ vm.card.description }}
+        {{ vm.card.description || 'No description' }}
       </p>
       <textarea ng-show="vm.editingDescription" ng-blur="vm.editingDescription = false" ng-model="vm.card.description"></textarea>
       <h3>Action Items</h3>
         <p ng-hide="vm.editingActionItems" ng-click="vm.editingActionItems = true">
-        <span ng-if="vm.card.actionItems === ''">Enter Action Items</span>
-        {{ vm.card.actionItems }}
+        {{ vm.card.actionItems || 'No action items' }}
       </p>
       <textarea ng-show="vm.editingActionItems" ng-blur="vm.editingActionItems = false" ng-model="vm.card.actionItems"></textarea>
     </div>
   </md-content>
   <div class="md-actions" layout="row">
-    <md-button ng-click="vm.close('cancel')">
-      Back
+    <md-button ng-click="vm.close('close')">
+      Close
     </md-button>
-    <md-button ng-click="vm.close('discussed')" class="md-primary md-raised">
+    <md-button ng-if="vm.card.status !== 'discussed'" ng-click="vm.close('discussed')" class="md-primary md-raised">
       Discussed
     </md-button>
   </div>
