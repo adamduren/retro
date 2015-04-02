@@ -20,6 +20,7 @@
       add: function(cardTitle) {
         var cards = getCardRef();
         return cards.$add({
+          status: 'toDiscuss',
           title: cardTitle,
           votes: 0
         });

@@ -4,7 +4,7 @@
   'use strict';
 
   angular
-    .module('retro-card-list.directive', ['retro.firebase'])
+    .module('retro-card-list.directive', [])
     .directive('retroCardList', RetroCardList);
 
   function RetroCardList() {
@@ -15,7 +15,8 @@
       controller: RetroCardListController,
       controllerAs: 'vm',
       scope: {
-        cardList: '='
+        cardList: '=',
+        filterExpression: '='
       }
     };
   }
@@ -23,11 +24,7 @@
   RetroCardList.$inject = [];
 
   function RetroCardListController() {
-    var vm = this;
 
-    vm.updateCard = function(card) {
-      vm.cardList.$save(card);
-    };
   }
 
   RetroCardListController.$inject = [];

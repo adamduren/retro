@@ -17,7 +17,7 @@
       };
     }
 
-    function RetroBoardController($state, retroBoardService, retroCardListService) {
+    function RetroBoardController($state, retroBoardService, retroCardListService, $filter) {
       var vm = this;
 
       vm.board = retroBoardService.get($state.params.id);
@@ -41,6 +41,6 @@
       };
     }
 
-    RetroBoardController.$inject = ['$state', 'retroBoardService', 'retroCardListService'];
+    RetroBoardController.$inject = ['$state', 'retroBoardService', 'retroCardListService', '$filter'];
 }());
 

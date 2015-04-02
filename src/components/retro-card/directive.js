@@ -27,11 +27,6 @@
     function RetroCardController() {
         var _this = this;
 
-        _.defaults(this.data, {
-            content: 'Placeholder',
-            numVotes: 0
-        });
-
         this.voted = false;
         this.editing = false;
 
