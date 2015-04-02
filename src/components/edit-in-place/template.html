@@ -1,0 +1,7 @@
+<div>
+    <div ng-hide="vm.editing">
+        <span class="edit-in-place static-text" ng-click="vm.startEditing()">{{ vm.viewOnlyText || vm.defaultText }}</span>
+    </div>
+
+    <ng-transclude ng-show="vm.editing"></ng-transclude>
+</div>

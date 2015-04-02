@@ -2,15 +2,14 @@
   <md-content class="sticky-container">
     <div class="dialog-content">
       <h2>{{ vm.card.title }}</h2>
-      <p ng-hide="vm.editingDescription" ng-click="vm.editingDescription = true">
-        {{ vm.card.description || 'No description' }}
-      </p>
-      <textarea ng-show="vm.editingDescription" ng-blur="vm.editingDescription = false" ng-model="vm.card.description"></textarea>
+      <div edit-in-place="true" default-text="No Description">
+          <textarea edit-this ng-model="vm.card.description"></textarea>
+      </div>
+
       <h3>Action Items</h3>
-        <p ng-hide="vm.editingActionItems" ng-click="vm.editingActionItems = true">
-        {{ vm.card.actionItems || 'No action items' }}
-      </p>
-      <textarea ng-show="vm.editingActionItems" ng-blur="vm.editingActionItems = false" ng-model="vm.card.actionItems"></textarea>
+      <div edit-in-place="true" default-text="No action items">
+          <textarea edit-this ng-model="vm.card.actionItems"></textarea>
+      </div>
     </div>
   </md-content>
   <div class="md-actions" layout="row">

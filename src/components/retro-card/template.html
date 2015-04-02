@@ -3,14 +3,10 @@
         <i class="fa fa-remove fa-2"></i>
     </md-button>
 
-    <md-card-content ng-if="!vm.editing">
-        <strong ng-click="vm.startEditing()">{{ vm.card.title }}</strong>
-    </md-card-content>
-
-    <md-card-content ng-if="vm.editing">
-        <md-input-container>
+    <md-card-content>
+        <md-input-container edit-in-place="true">
             <label>Card Title</label>
-            <textarea ng-model="vm.card.title" ng-blur="vm.stopEditing()"></textarea>
+            <textarea ng-model="vm.card.title" edit-this></textarea>
         </md-input-container>
     </md-card-content>
 
