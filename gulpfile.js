@@ -7,6 +7,7 @@ var livereload = require('gulp-livereload');
 var plumber = require('gulp-plumber');
 var concat = require('gulp-concat');
 var serve = require('gulp-serve');
+var batch = require('gulp-batch');
 var del = require('del');
 
 var inputPaths = {
@@ -64,10 +65,22 @@ gulp.task('watch', function() {
   livereload.listen({
     start: true
   });
-  gulp.watch(inputPaths.templates, ['templates']);
-  gulp.watch(inputPaths.less, ['less']);
-  gulp.watch(inputPaths.scripts, ['scripts']);
-  gulp.watch(inputPaths.bower, ['bower']);
+
+  gulp.watch(inputPaths.templates, batch(function () {
+    gulp.start('templates');
+  }));
+
+  gulp.watch(inputPaths.less, batch(function () {
+    gulp.start('less');
+  }));
+
+  gulp.watch(inputPaths.scripts, batch(function () {
+    gulp.start('scripts');
+  }));
+
+  gulp.watch(inputPaths.bower, batch(function () {
+    gulp.start('bower');
+  }));
 });
 
 gulp.task('build', [
