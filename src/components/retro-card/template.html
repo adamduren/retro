@@ -1,6 +1,9 @@
 <md-card class="retro-item">
-    <div ng-if="!vm.editing">
-        <div ng-click="vm.startEditing()">{{ vm.card.title }}</div>
+    <md-card-content ng-if="!vm.editing">
+        <strong ng-click="vm.startEditing()">{{ vm.card.title }}</strong>
+    </md-card-content>
+
+    <md-card-footer>
         <md-button
             ng-click="vm.toggleVote()"
             ng-if="vm.card.status !== 'discussed'"
@@ -10,15 +13,12 @@
         <md-button class="md-primary" ng-click="vm.viewCard(vm.card)">
             View Card
         </md-button>
-    </div>
+    </md-card-footer>
 
-    <div ng-if="vm.editing">
+    <md-card-content ng-if="vm.editing">
         <md-input-container>
             <label>Card Title</label>
-            <textarea ng-model="vm.card.title"></textarea>
+            <textarea ng-model="vm.card.title" ng-blur="vm.stopEditing()"></textarea>
         </md-input-container>
-        <md-button class="md-primary" ng-click="vm.stopEditing()">
-            Save
-        </md-button>
-    </div>
+    </md-card-content>
 </md-card>
