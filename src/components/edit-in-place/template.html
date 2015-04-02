@@ -1,7 +1,7 @@
 <div>
     <div ng-hide="vm.editing">
         <span class="edit-in-place" ng-class="{'static-text': vm.viewOnlyText, 'default-text': !vm.viewOnlyText}"
-              ng-click="vm.startEditing()">{{ vm.viewOnlyText || vm.defaultText }}</span>
+              btf-markdown="vm.viewOnlyText || vm.defaultText" ng-click="vm.startEditing()"></span>
     </div>
 
     <ng-transclude ng-show="vm.editing"></ng-transclude>

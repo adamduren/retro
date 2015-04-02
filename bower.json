@@ -21,6 +21,7 @@
     "angularfire": "~1.0.0",
     "lodash": "~3.6.0",
     "angular-material": "~0.8.3",
-    "lesshat": "~3.0.2"
+    "lesshat": "~3.0.2",
+    "angular-markdown-directive": "~0.3.1"
   }
 }
