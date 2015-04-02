@@ -42,6 +42,11 @@
       vm.removeUser = function (name) {
         vm.board.removeUser(name);
       };
+
+      vm.toggleUserDone = function(user) {
+        user.isDone = !user.isDone;
+        vm.board.$save();
+      };
     }
 
     RetroBoardController.$inject = ['$state', '$mdDialog', 'retroBoardService', 'retroCardListService'];

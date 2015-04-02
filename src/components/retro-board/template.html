@@ -21,7 +21,7 @@
                     <div
                         class="md-tile-content user"
                         ng-class="{ 'is-done': user.isDone  }"
-                        ng-click="user.isDone = !user.isDone">{{ user.name }}
+                        ng-click="vm.toggleUserDone(user)">{{ user.name }}
                     </div>
                     <div class="board-remove-user md-tile-right">
                         <md-button class="md-warn" ng-click="vm.removeUser(user)">
