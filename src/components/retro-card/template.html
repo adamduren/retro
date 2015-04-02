@@ -1,24 +1,22 @@
-<md-card class="retro-item">
+<md-card class="retro-item" ng-click="vm.viewCard(vm.card)">
     <md-button class="md-card-close md-warn" ng-click="vm.removeCard()">
         <i class="fa fa-remove fa-2"></i>
     </md-button>
 
     <md-card-content>
-        <md-input-container edit-in-place="true">
+        <md-input-container edit-in-place="true" stop-propagation="click">
             <label>Card Title</label>
-            <input type="text" ng-model="vm.card.title" edit-this></input>
+            <input type="text" ng-model="vm.card.title" edit-this>
         </md-input-container>
     </md-card-content>
 
     <md-card-footer>
         <md-button
             ng-click="vm.toggleVote()"
+            stop-propagation="click"
             ng-if="vm.card.status !== 'discussed'"
             class="md-primary">
             <span>{{ vm.card.votes }} <i class="fa fa-thumbs-up"></i></span>
-        </md-button>
-        <md-button class="md-primary" ng-click="vm.viewCard(vm.card)">
-            View Card
         </md-button>
     </md-card-footer>
 </md-card>

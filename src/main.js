@@ -4,7 +4,7 @@
   'use strict';
 
   angular
-    .module('retro', ['retro-board', 'ui.router'])
+    .module('retro', ['retro-board', 'ui.router', 'stop-propagation'])
     .config(Config)
     .controller('MainController', MainController);
 
