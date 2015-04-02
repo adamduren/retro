@@ -17,7 +17,7 @@
             require: '^retroCardList',
             link: RetroCardLink,
             scope: {
-                data: '='
+              card: '='
             }
         };
     }
@@ -49,8 +49,10 @@
     RetroCardController.$inject = [];
 
     function RetroCardLink($scope, $elem, $attrs, retroCardList) {
-        $scope.$watch('vm.data', function (data) {
-            retroCardList.updateCard(data);
+        $scope.$watch('vm.card', function (newValue, oldValue) {
+          if (newValue !== oldValue) {
+            newValue.$save();
+          }
         }, true);
     }
 })();

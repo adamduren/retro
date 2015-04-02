@@ -6,7 +6,7 @@
   var baseUrl = 'https://drivecurrent-retrospectives.firebaseio.com/';
 
   angular
-    .module('retro-card-list.service', ['firebase'])
+    .module('retro-card-list.service', ['firebase', 'retro-board'])
     .factory('retroCardService', RetroCardService)
     .factory('retroCardListService', RetroCardListService);
 
@@ -33,13 +33,26 @@
 
   RetroCardService.$inject = ['$firebaseArray'];
 
-  function RetroCardListService() {
-    return {
-      get: function() {
+  function RetroCardListService($firebaseArray, $firebaseObject) {
+    var CardListFactory;
 
+    CardListFactory = $firebaseArray.$extend({
+      $$added: function(snapshot) {
+        var ref = new Firebase(baseUrl + 'cards_data/' + snapshot.val());
+        return $firebaseObject(ref);
+      },
+      $$updated: function(snapshot) {
+        return false;
+      }
+    });
+
+    return {
+      get: function(board) {
+        var cards = board.$ref().child('cards');
+        return new CardListFactory(cards);
       }
     };
   }
 
-  RetroCardListService.$inject = [];
+  RetroCardListService.$inject = ['$firebaseArray', '$firebaseObject'];
 }());

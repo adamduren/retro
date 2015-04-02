@@ -21,7 +21,7 @@
       var vm = this;
 
       vm.board = retroBoardService.get($state.params.id);
-      vm.cards = retroCardListService.get(vm.board.$id);
+      vm.cards = retroCardListService.get(vm.board);
 
       vm.toDiscussCardTitle = '';
       vm.addToDiscussCard = function(cardTitle) {

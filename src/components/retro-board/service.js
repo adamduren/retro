@@ -50,8 +50,6 @@
       var
         ref = new Firebase(baseUrl + 'boards_data/' + key),
         board = new BoardFactory(ref);
-
-      //board.cards = '';  // todo: card list here
       return board;
     }
 
