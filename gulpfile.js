@@ -3,10 +3,11 @@
 
 var gulp = require('gulp');
 var less = require('gulp-less');
-var clean = require('gulp-clean');
 var livereload = require('gulp-livereload');
 var plumber = require('gulp-plumber');
 var concat = require('gulp-concat');
+var serve = require('gulp-serve');
+var del = require('del');
 
 var inputPaths = {
   templates: ['src/**/*.html'],
@@ -53,9 +54,10 @@ gulp.task('bower', function () {
 });
 
 gulp.task('clean', function () {
-    return gulp.src('public', {read: false})
-        .pipe(clean());
+    del.sync(['public/']);
 });
+
+gulp.task('serve', serve('public'));
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
@@ -69,13 +71,16 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', [
+  'clean',
   'templates',
   'less',
   'scripts',
-  'bower']);
+  'bower'
+]);
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', [
-  'watch',
-  'build'
+  'build',
+  'serve',
+  'watch'
 ]);
