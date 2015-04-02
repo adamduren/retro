@@ -29,11 +29,13 @@
     var vm = this;
 
     vm.viewOnlyText = '';
+    vm.$element = null;
+    vm.editing = false;
+
     vm.setViewOnlyText = function(text) {
       vm.viewOnlyText = text;
     };
 
-    vm.$element = null;
     vm.setEditElement = function($element) {
       if (vm.$element) {
         vm.$element.off('.editInPlace');
@@ -46,7 +48,6 @@
       });
     };
 
-    vm.editing = false;
     vm.startEditing = function () {
       if (!vm.canEdit) {
         return false;
