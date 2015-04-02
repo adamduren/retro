@@ -8,25 +8,37 @@
   font-weight: bold !important;
 }
 
-.board-user {
+
+.remove() {
   &:hover {
-    .board-remove-user  {
-    opacity: 1;
+    .fa-remove {
+      opacity: 1;
     }
   }
 
-  .board-remove-user {
+  .fa-remove {
     opacity: 0;
     .transition(opacity .25s ease-in-out);
   }
 }
 
+.board-user,
+.retro-item {
+ .remove();
+}
+
 md-dialog {
-    min-width: 50%;
+  min-width: 50%;
 }
 
 md-card {
   position: relative;
+
+  .md-card-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   // Anchor the footer at the bottom
   md-card-footer {
@@ -41,6 +53,4 @@ md-card {
     padding: 10px;
     margin-bottom: 50px;
   }
-
-  padding: 10px;
 }

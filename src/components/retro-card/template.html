@@ -1,12 +1,17 @@
 <md-card class="retro-item">
-    <md-card-header>
-        <md-button class="md-warn" ng-click="vm.removeCard()">
-            <i class="fa fa-remove fa-2"></i>
-        </md-button>
-    </md-card-header>
+    <md-button class="md-card-close md-warn" ng-click="vm.removeCard()">
+        <i class="fa fa-remove fa-2"></i>
+    </md-button>
 
     <md-card-content ng-if="!vm.editing">
         <strong ng-click="vm.startEditing()">{{ vm.card.title }}</strong>
+    </md-card-content>
+
+    <md-card-content ng-if="vm.editing">
+        <md-input-container>
+            <label>Card Title</label>
+            <textarea ng-model="vm.card.title" ng-blur="vm.stopEditing()"></textarea>
+        </md-input-container>
     </md-card-content>
 
     <md-card-footer>
@@ -20,11 +25,4 @@
             View Card
         </md-button>
     </md-card-footer>
-
-    <md-card-content ng-if="vm.editing">
-        <md-input-container>
-            <label>Card Title</label>
-            <textarea ng-model="vm.card.title" ng-blur="vm.stopEditing()"></textarea>
-        </md-input-container>
-    </md-card-content>
 </md-card>
