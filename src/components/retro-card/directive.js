@@ -49,9 +49,6 @@
             card: card
           },
           templateUrl: '/components/retro-card/dialog.html',
-        })
-        .then(function(data) {
-          console.log(data);
         });
       };
     }
@@ -67,8 +64,12 @@
     }
 
     function RetroCardDialogController($mdDialog) {
-      this.answer = function(answer) {
-        $mdDialog.hide(answer);
+      this.close = function(action) {
+        if (action === 'discussed') {
+            this.card.status = action;
+            this.card.$save();
+        }
+        $mdDialog.hide();
       };
     }
 })();
