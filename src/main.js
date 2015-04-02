@@ -15,21 +15,35 @@
       };
     }
 
-    function DialogController($scope, $mdDialog) {
-      $scope.answer = function(answer) {
-        $mdDialog.hide();
-      }
+    function DialogController($mdDialog) {
+      this.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
     }
 
     function AppController($mdSidenav, $mdDialog, retroBoardService) {
       this.boards = retroBoardService.boards;
 
-      this.viewCard = function(ev) {
+      this.activeCard = {
+        name: 'My Card',
+        description: 'Something about the card',
+        actionItems: 'We should do this',
+        status: 'Discussed',
+      };
+
+      this.viewCard = function() {
         $mdDialog.show({
           controller: DialogController,
+          controllerAs: 'vm',
+          bindToController: true,
+          locals: {
+            card: this.activeCard
+          },
           templateUrl: '/dialog.template.html',
-          targetEvent: ev
         })
+        .then(function(data) {
+          console.log(data);
+        });
       };
 
       this.addBoard = function(name) {
@@ -57,6 +71,6 @@
     }
 
     AppController.$inject = ['$mdSidenav', '$mdDialog', 'retroBoardService'];
-    DialogController.$inject = ['$scope', '$mdDialog'];
+    DialogController.$inject = ['$mdDialog'];
 }());
 

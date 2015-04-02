@@ -1,16 +1,20 @@
 <md-dialog>
   <md-content class="sticky-container">
     <div class="dialog-content">
-      <h2>Title here</h2>
-      <p>Content here.</p>
-      <input type="checkbox"> Item 1<br>
-      <input type="checkbox"> Item 2<br>
-      <input type="checkbox"> Item 3<br>
+      <h2>{{ vm.card.name }}</h2>
+      <p ng-hide="vm.editingDescription" ng-click="vm.editingDescription = true">{{ vm.card.description }}</p>
+      <textarea ng-show="vm.editingDescription" ng-blur="vm.editingDescription = false" ng-model="vm.card.description"></textarea>
+      <h3>Action Items</h3>
+      <p ng-hide="vm.editingActionItems" ng-click="vm.editingActionItems = true">{{ vm.card.actionItems }}</p>
+      <textarea ng-show="vm.editingActionItems" ng-blur="vm.editingActionItems = false" ng-model="vm.card.actionItems"></textarea>
     </div>
   </md-content>
   <div class="md-actions" layout="row">
-    <md-button ng-click="answer('done')" class="md-primary">
-      Done
+    <md-button ng-click="vm.answer('cancel')">
+      Back
+    </md-button>
+    <md-button ng-click="vm.answer('discussed')" class="md-primary md-raised">
+      Discussed
     </md-button>
   </div>
 </md-dialog>
