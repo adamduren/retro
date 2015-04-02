@@ -1,7 +1,7 @@
 <md-card class="retro-item" flex>
     <div ng-if="!vm.editing">
         <div ng-click="vm.editing = true">{{ vm.card.title || '&nbsp;' }}</div>
-        <input type="button" ng-click="vm.toggleVote()" value="Vote"> X <span>{{ vm.card.numVotes }}</span>
+        <input type="button" ng-click="vm.toggleVote()" value="Vote"> X <span>{{ vm.card.votes }}</span>
     </div>
 
     <div ng-if="vm.editing">

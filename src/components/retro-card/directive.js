@@ -32,9 +32,9 @@
 
         this.toggleVote = function() {
             if (_this.voted) {
-                _this.data.numVotes -= 1;
+                _this.card.votes -= 1;
             } else {
-                _this.data.numVotes += 1;
+                _this.card.votes+= 1;
             }
 
             _this.voted = !_this.voted;
