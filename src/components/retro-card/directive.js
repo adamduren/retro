@@ -27,18 +27,31 @@
     function RetroCardController($mdDialog) {
         var _this = this;
 
-        this.voted = false;
+      this.voted = false;
+      this.editing = false;
+
+      this.startEditing = function() {
+        if (this.card.status === 'discussed') {
+          return false;
+        }
+
+        this.editing = true;
+        return this.editing;
+      };
+
+      this.stopEditing = function() {
         this.editing = false;
+      };
 
-        this.toggleVote = function() {
-            if (_this.voted) {
-                _this.card.votes -= 1;
-            } else {
-                _this.card.votes+= 1;
-            }
+      this.toggleVote = function() {
+          if (_this.voted) {
+              _this.card.votes -= 1;
+          } else {
+              _this.card.votes+= 1;
+          }
 
-            _this.voted = !_this.voted;
-        };
+          _this.voted = !_this.voted;
+      };
 
       this.viewCard = function(card) {
         $mdDialog.show({

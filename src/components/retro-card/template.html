@@ -1,7 +1,10 @@
 <md-card class="retro-item">
     <div ng-if="!vm.editing">
-        <div ng-click="vm.editing = true">{{ vm.card.title || '&nbsp;' }}</div>
-        <md-button class="md-primary" ng-click="vm.toggleVote()">
+        <div ng-click="vm.startEditing()">{{ vm.card.title }}</div>
+        <md-button
+            ng-click="vm.toggleVote()"
+            ng-if="vm.card.status !== 'discussed'"
+            class="md-primary">
             <span>{{ vm.card.votes }} <i class="fa fa-thumbs-up"></i></span>
         </md-button>
         <md-button class="md-primary" ng-click="vm.viewCard(vm.card)">
@@ -10,7 +13,12 @@
     </div>
 
     <div ng-if="vm.editing">
-        <textarea ng-model="vm.card.title"></textarea>
-        <input type="submit" value="Save" ng-click="vm.editing = false">
+        <md-input-container>
+            <label>Card Title</label>
+            <textarea ng-model="vm.card.title"></textarea>
+        </md-input-container>
+        <md-button class="md-primary" ng-click="vm.stopEditing()">
+            Save
+        </md-button>
     </div>
 </md-card>
